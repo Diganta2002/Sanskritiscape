@@ -10,6 +10,22 @@
     --glass-border: rgba(255, 255, 255, 0.08);
     --blur: 10px;
     --bg-gradient: linear-gradient(180deg, #050505 0%, #1a0b05 100%);
+    --card-bg: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.8));
+    --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --nav-bg: rgba(5, 5, 5, 0.8);
+}
+
+body.light-mode {
+    --bg-color: #ffffff;
+    --text-color: #1a1a1a;
+    --text-secondary: #555555;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --glass-bg: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --bg-gradient: linear-gradient(180deg, #ffffff 0%, #f0f0f0 100%);
+    --card-bg: linear-gradient(145deg, #ffffff, #f0f0f0);
+    --card-hover-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --nav-bg: rgba(255, 255, 255, 0.9);
 }
 
 * {
@@ -51,9 +67,9 @@ ul {
     width: 100%;
     z-index: 1000;
     padding: 20px 0;
-    background: rgba(5, 5, 5, 0.8);
+    background: var(--nav-bg);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-container {
@@ -87,7 +103,8 @@ ul {
     font-weight: 500;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
     color: var(--text-color);
 }
 
@@ -105,12 +122,12 @@ ul {
 
 .btn-glass {
     background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--border-color);
     color: var(--text-color);
 }
 
 .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--border-color);
     transform: translateY(-2px);
 }
 
@@ -130,9 +147,28 @@ ul {
     display: none;
     background: none;
     border: none;
-    color: white;
+    color: var(--text-color);
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    background: var(--glass-bg);
+    transform: rotate(15deg);
 }
 
 /* Hero Section */
@@ -204,10 +240,12 @@ ul {
 }
 
 .gradient-text {
-    background: linear-gradient(90deg, #ffffff, var(--accent-orange));
+    background: linear-gradient(90deg, var(--text-color), var(--accent-orange));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
-    padding-bottom: 5px; /* prevent clip cut-off */
+    padding-bottom: 5px;
+    /* prevent clip cut-off */
 }
 
 .hero-subtitle {
@@ -232,7 +270,7 @@ ul {
     text-align: center;
     border-top: 1px solid var(--border-color);
     border-bottom: 1px solid var(--border-color);
-    background: rgba(255,255,255,0.01);
+    background: rgba(255, 255, 255, 0.01);
 }
 
 .logos-title {
@@ -310,7 +348,7 @@ ul {
 }
 
 .feature-card {
-    background: linear-gradient(145deg, rgba(20, 20, 20, 0.8), rgba(10, 10, 10, 0.8));
+    background: var(--card-bg);
     border: 1px solid var(--glass-border);
     padding: 40px;
     border-radius: 20px;
@@ -322,7 +360,7 @@ ul {
 .feature-card:hover {
     transform: translateY(-5px);
     border-color: rgba(255, 77, 0, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: var(--card-hover-shadow);
 }
 
 /* Glow effect on card hover */
@@ -371,7 +409,7 @@ ul {
 /* Features 2 Section - Dashboard */
 .features-2 {
     padding: 100px 0;
-    background: linear-gradient(to top, #080808, var(--bg-color));
+    background: linear-gradient(to top, var(--bg-color), var(--bg-color));
 }
 
 .features-2-container {
@@ -423,12 +461,13 @@ ul {
 
 /* Updated Dashboard Mockup Styles */
 .dashboard-mockup {
-    background: #0f0f0f; /* Changed from glass to solid dark for better contrast */
+    background: #0f0f0f;
+    /* Changed from glass to solid dark for better contrast */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     padding: 30px;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     /* Add a subtle glow behind it */
     box-shadow: 0 0 100px rgba(255, 77, 0, 0.05);
 }
@@ -452,7 +491,7 @@ ul {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
-    color: #fff; /* Ensure text is white */
+    color: var(--text-color);
 }
 
 .dashboard-stat {
@@ -461,7 +500,7 @@ ul {
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #fff; /* Ensure number is white */
+    color: var(--text-color);
 }
 
 .badge-green {
@@ -478,7 +517,8 @@ ul {
     gap: 20px;
     height: 200px;
     padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Subtle divider */
 }
 
 .bar {
@@ -498,13 +538,23 @@ ul {
     color: var(--text-secondary);
 }
 
-.bar-1 { 
-    height: 60%; 
-    background: linear-gradient(to top, #ff4d00, #ff8c00); 
+.bar-1 {
+    height: 60%;
+    background: linear-gradient(to top, #ff4d00, #ff8c00);
     box-shadow: 0 0 20px rgba(255, 77, 0, 0.3);
 }
-.bar-2 { height: 80%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
-.bar-3 { height: 50%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+
+.bar-2 {
+    height: 80%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bar-3 {
+    height: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
 /* Footer */
 .footer {
@@ -518,9 +568,10 @@ ul {
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .nav-list {
-        display: none; /* simple hide for mockup */
+        display: none;
+        /* simple hide for mockup */
     }
-    
+
     .mobile-menu-btn {
         display: block;
     }
