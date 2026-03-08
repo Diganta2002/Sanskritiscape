@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages – Sanskritiscape Interiors</title>
+    <meta name="description"
+        content="Invest in beautiful spaces. Explore Sanskritiscape Interiors' transparent design packages tailored for homes, studios, and luxury estates.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ─── Pricing-page-specific styles ─── */
+
+        .pricing-hero {
+            padding: 160px 0 60px;
+            text-align: center;
+        }
+
+        .pricing-hero .hero-title {
+            font-size: 3.2rem;
+        }
+
+        /* Billing Toggle */
+        .billing-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            margin: 40px 0 70px;
+        }
+
+        .billing-label {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .billing-label.active-label {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 52px;
+            height: 28px;
+            cursor: pointer;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-track {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 77, 0, 0.15);
+            border: 1px solid rgba(255, 77, 0, 0.4);
+            border-radius: 50px;
+            transition: background 0.3s;
+        }
+
+        .toggle-track::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            left: 4px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--accent-orange);
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch input:checked+.toggle-track::before {
+            transform: translate(24px, -50%);
+        }
+
+        .save-badge {
+            background: rgba(255, 77, 0, 0.12);
+            border: 1px solid rgba(255, 77, 0, 0.3);
+            color: var(--accent-orange);
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ─── Pricing cards ─── */
+        .pricing-section {
+            padding: 20px 0 120px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            align-items: start;
+        }
+
+        .pricing-card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 40px 36px 44px;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 77, 0, 0.35);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 77, 0, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.35s;
+            pointer-events: none;
+        }
+
+        .pricing-card:hover::before {
+            opacity: 1;
+        }
+
+        .pricing-card.featured {
+            border: 1.5px solid rgba(255, 77, 0, 0.5);
+            background: linear-gradient(145deg, rgba(255, 77, 0, 0.06), rgba(10, 10, 10, 0.9));
+            transform: scale(1.03);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-8px);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+            color: #fff;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .plan-icon {
+            width: 46px;
+            height: 46px;
+            background: rgba(255, 77, 0, 0.1);
+            border: 1px solid rgba(255, 77, 0, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-orange);
+            font-size: 1.1rem;
+            margin-bottom: 18px;
+        }
+
+        .plan-name {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .plan-desc {
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.55;
+            margin-bottom: 28px;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: flex-end;
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .currency {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .price-amount {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1;
+            transition: opacity 0.3s;
+        }
+
+        .price-period {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .price-annual-note {
+            font-size: 0.78rem;
+            color: var(--accent-orange);
+            margin-bottom: 32px;
+            min-height: 18px;
+        }
+
+        .card-divider {
+            border: none;
+            border-top: 1px solid var(--glass-border);
+            margin: 28px 0;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 36px;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .features-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+        }
+
+        .features-list li .check-icon {
+            color: var(--accent-orange);
+            font-size: 0.8rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .features-list li.disabled {
+            opacity: 0.35;
+        }
+
+        .features-list li.disabled .check-icon {
+            color: var(--text-secondary);
+        }
+
+        .btn-outline {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 13px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-outline:hover {
+            background: var(--glass-bg);
+            border-color: rgba(255, 77, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary-block {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 13px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-orange-light));
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 77, 0, 0.35);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary-block:hover {
+            box-shadow: 0 6px 28px rgba(255, 77, 0, 0.55);
+            transform: translateY(-2px);
+        }
+
+        /* INR price note */
+        .price-inr {
+            font-size: 0.82rem;
+            color: var(--accent-orange);
+            font-weight: 500;
+            margin-top: 2px;
+            margin-bottom: 4px;
+            letter-spacing: 0.02em;
+            opacity: 0.85;
+        }
+        /* ─── Comparison table ─── */
+        .compare-section {
+            padding: 0 0 120px;
+        }
+
+        .compare-table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+        }
+
+        table.compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            font-size: 0.9rem;
+        }
+
+        table.compare-table thead tr {
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        table.compare-table th,
+        table.compare-table td {
+            padding: 18px 24px;
+            text-align: center;
+            border-right: 1px solid var(--glass-border);
+        }
+
+        table.compare-table th:first-child,
+        table.compare-table td:first-child {
+            text-align: left;
+            width: 35%;
+        }
+
+        table.compare-table th:last-child,
+        table.compare-table td:last-child {
+            border-right: none;
+        }
+
+        table.compare-table th {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        table.compare-table th.th-featured {
+            color: var(--accent-orange);
+            background: rgba(255, 77, 0, 0.05);
+        }
+
+        table.compare-table tbody tr {
+            border-bottom: 1px solid var(--glass-border);
+            transition: background 0.2s;
+        }
+
+        table.compare-table tbody tr:last-child {
+            border-bottom: none;
+        }
+
+        table.compare-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        table.compare-table td {
+            color: var(--text-secondary);
+        }
+
+        table.compare-table td:first-child {
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        table.compare-table td.check {
+            color: var(--accent-orange);
+            font-size: 1rem;
+        }
+
+        table.compare-table td.cross {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 1rem;
+        }
+
+        table.compare-table tr.category-row td {
+            background: rgba(255, 77, 0, 0.04);
+            color: var(--accent-orange);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 24px;
+        }
+
+        /* ─── FAQ ─── */
+        .faq-section {
+            padding: 0 0 120px;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 16px;
+            margin-top: 50px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(255, 77, 0, 0.25);
+        }
+
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 22px 26px;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .faq-question .faq-arrow {
+            color: var(--accent-orange);
+            font-size: 0.85rem;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-question .faq-arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+            color: var(--text-secondary);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            padding: 0 26px;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding: 0 26px 22px;
+        }
+
+        /* ─── CTA Banner ─── */
+        .cta-banner {
+            margin: 0 0 120px;
+            background: linear-gradient(135deg, rgba(255, 77, 0, 0.1), rgba(255, 140, 0, 0.05));
+            border: 1px solid rgba(255, 77, 0, 0.25);
+            border-radius: 28px;
+            padding: 70px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 200px;
+            background: radial-gradient(ellipse, rgba(255, 77, 0, 0.2), transparent 70%);
+            pointer-events: none;
+        }
+
+        .cta-banner h2 {
+            font-size: 2.4rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-banner p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 36px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-banner-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 768px) {
+            .pricing-hero .hero-title { font-size: 2.2rem; }
+            .pricing-card.featured { transform: none; }
+            .pricing-card.featured:hover { transform: translateY(-8px); }
+            .faq-grid { grid-template-columns: 1fr; }
+            .cta-banner h2 { font-size: 1.7rem; }
+            table.compare-table th,
+            table.compare-table td { padding: 14px 12px; font-size: 0.8rem; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-couch logo-icon"></i>
+                <span class="logo-text">Sanskritiscape</span>
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+
+                    <li><a href="#" class="nav-link">Services</a></li>
+                    <li><a href="Cost.html" class="nav-link active">Packages</a></li>
+                    <li><a href="#" class="nav-link">About us</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            <button class="theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="pricing-hero fade-in-section" id="pricing-hero">
+        <div class="container">
+            <div class="badge-pill">
+                <i class="fa-solid fa-paintbrush"></i> Our Packages
+            </div>
+            <h1 class="hero-title">
+                Invest in Spaces <br>
+                <span class="gradient-text">That Inspire You</span>
+            </h1>
+            <p class="hero-subtitle">
+                Transparent, all-inclusive design packages crafted for every home and budget. No hidden costs — just beautiful interiors, delivered.
+            </p>
+
+            <!-- Billing toggle -->
+            <div class="billing-toggle-wrapper">
+                <span class="billing-label active-label" id="monthly-label">Per Room</span>
+                <label class="toggle-switch" for="billing-toggle" aria-label="Switch pricing view">
+                    <input type="checkbox" id="billing-toggle">
+                    <span class="toggle-track"></span>
+                </label>
+                <span class="billing-label" id="annual-label">Full Home</span>
+                <span class="save-badge">Save 20%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Design Packages -->
+    <section class="pricing-section fade-in-section" id="pricing-section">
+        <div class="container">
+            <div class="pricing-grid">
+
+                <!-- Essential -->
+                <div class="pricing-card" id="card-starter">
+                    <div class="plan-icon"><i class="fa-solid fa-seedling"></i></div>
+                    <div class="plan-name">Essential</div>
+                    <div class="plan-desc">Ideal for single rooms or small apartments seeking a fresh, cohesive look.</div>
+                    <div class="price-row">
+                        <span class="currency">$</span>
+                        <span class="price-amount" data-monthly="999" data-annual="799">999</span>
+                    </div>
+                    <div class="price-period">/ room</div>
+                    <div class="price-inr" id="inr-starter">≈ ₹83,000</div>
+                    <div class="price-annual-note" id="note-starter">&nbsp;</div>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check check-icon"></i> 1 room design</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Initial design consultation (1 hr)</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Mood board &amp; colour palette</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Furniture layout plan</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Shopping list &amp; vendor links</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark check-icon"></i> 3D rendering</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark check-icon"></i> Procurement &amp; sourcing</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark check-icon"></i> On-site supervision</li>
+                    </ul>
+                    <a href="mailto:sanskritiscape@gmail.com" class="btn-outline" id="cta-starter">Book a Consultation</a>
+                </div>
+
+                <!-- Signature (Featured) -->
+                <div class="pricing-card featured" id="card-pro">
+                    <span class="popular-badge">Most Popular</span>
+                    <div class="plan-icon"><i class="fa-solid fa-star"></i></div>
+                    <div class="plan-name">Signature</div>
+                    <div class="plan-desc">Our most-loved package — a complete redesign for homeowners who want a stunning, liveable space.</div>
+                    <div class="price-row">
+                        <span class="currency">$</span>
+                        <span class="price-amount" data-monthly="3499" data-annual="2799">3,499</span>
+                    </div>
+                    <div class="price-period">/ project (up to 3 rooms)</div>
+                    <div class="price-inr" id="inr-pro">≈ ₹2,90,000</div>
+                    <div class="price-annual-note" id="note-pro">&nbsp;</div>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check check-icon"></i> Up to 3 rooms designed</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> In-depth consultation (2 hrs)</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Full mood board &amp; material samples</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Photo-realistic 3D renderings</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Furniture &amp; décor sourcing</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Contractor coordination</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> 2 revision rounds</li>
+                        <li class="disabled"><i class="fa-solid fa-xmark check-icon"></i> Dedicated design manager</li>
+                    </ul>
+                    <a href="mailto:sanskritiscape@gmail.com" class="btn-primary-block" id="cta-pro">Get Started</a>
+                </div>
+
+                <!-- Bespoke -->
+                <div class="pricing-card" id="card-enterprise">
+                    <div class="plan-icon"><i class="fa-solid fa-gem"></i></div>
+                    <div class="plan-name">Bespoke</div>
+                    <div class="plan-desc">White-glove, luxury design for entire homes, villas, and commercial spaces — tailored to you.</div>
+                    <div class="price-row">
+                        <span class="currency"></span>
+                        <span class="price-amount" style="font-size:2.4rem;" data-monthly="Custom" data-annual="Custom">Custom</span>
+                    </div>
+                    <div class="price-period">tailored to your property</div>
+                    <div class="price-inr" id="inr-enterprise">Contact for quote</div>
+                    <div class="price-annual-note" id="note-enterprise">&nbsp;</div>
+                    <ul class="features-list">
+                        <li><i class="fa-solid fa-check check-icon"></i> Whole-home design (unlimited rooms)</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Dedicated senior designer</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Premium material &amp; finish sourcing</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Custom furniture &amp; joinery design</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Full project management</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> On-site supervision &amp; installation</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Smart home &amp; lighting integration</li>
+                        <li><i class="fa-solid fa-check check-icon"></i> Post-completion styling &amp; photography</li>
+                    </ul>
+                    <a href="mailto:sanskritiscape@gmail.com" class="btn-outline" id="cta-enterprise">Request a Quote</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Package Comparison Table -->
+    <section class="compare-section fade-in-section" id="compare-section">
+        <div class="container">
+            <div class="section-header center">
+                <div class="badge-pill-small">Full Breakdown</div>
+                <h2 class="section-title">Compare <span class="gradient-text-orange">Packages</span></h2>
+                <p class="section-subtitle">A side-by-side look at everything included in each design package.</p>
+            </div>
+
+            <div class="compare-table-wrapper">
+                <table class="compare-table" role="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">What's Included</th>
+                            <th scope="col">Essential</th>
+                            <th scope="col" class="th-featured">Signature</th>
+                            <th scope="col">Bespoke</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="category-row"><td colspan="4">Design Services</td></tr>
+                        <tr>
+                            <td>Design Consultation</td>
+                            <td>1 hr</td>
+                            <td>2 hrs</td>
+                            <td>Unlimited sessions</td>
+                        </tr>
+                        <tr>
+                            <td>Mood Board &amp; Colour Palette</td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Furniture Layout Plan</td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Photo-realistic 3D Renderings</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Custom Furniture &amp; Joinery Design</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+
+                        <tr class="category-row"><td colspan="4">Rooms &amp; Scope</td></tr>
+                        <tr>
+                            <td>Rooms Included</td>
+                            <td>1 room</td><td>Up to 3 rooms</td><td>Entire home / property</td>
+                        </tr>
+                        <tr>
+                            <td>Revision Rounds</td>
+                            <td>1</td><td>2</td><td>Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Material Sample Delivery</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+
+                        <tr class="category-row"><td colspan="4">Procurement &amp; Installation</td></tr>
+                        <tr>
+                            <td>Shopping List &amp; Vendor Links</td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Furniture &amp; Décor Sourcing</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>On-site Supervision &amp; Installation</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+
+                        <tr class="category-row"><td colspan="4">Extras &amp; Support</td></tr>
+                        <tr>
+                            <td>Smart Home &amp; Lighting Integration</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Post-completion Styling &amp; Photography</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Dedicated Senior Designer</td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="cross"><i class="fa-solid fa-xmark"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                        <tr>
+                            <td>Email &amp; Chat Support</td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                            <td class="check"><i class="fa-solid fa-check"></i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section fade-in-section" id="faq-section">
+        <div class="container">
+            <div class="section-header center">
+                <div class="badge-pill-small">Got Questions?</div>
+                <h2 class="section-title">Frequently <span class="gradient-text-orange">Asked</span></h2>
+                <p class="section-subtitle">Everything you need to know before starting your design journey.</p>
+            </div>
+
+            <div class="faq-grid">
+                <div class="faq-item" id="faq-1">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                        How long does an interior design project take?
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" role="region">
+                        Timelines vary by scope. An Essential single-room project typically takes 2–4 weeks from
+                        consultation to final delivery. A Signature project (up to 3 rooms) takes 6–10 weeks, while
+                        full Bespoke home projects are planned collaboratively and can range from 3 to 6 months.
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq-2">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                        Can I see examples of your previous work before committing?
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" role="region">
+                        Absolutely! Visit our projects page to browse curated work across residential, commercial,
+                        and hospitality spaces. You can also book a free 30-minute discovery call with one of our
+                        designers to discuss your vision and explore our style library in detail.
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq-3">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                        Do I need to be physically present during the project?
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" role="region">
+                        Not at all. All packages can be delivered remotely — we conduct virtual consultations, share
+                        digital mood boards and 3D renders, and coordinate with your local contractors on your behalf.
+                        For Bespoke projects, we do recommend at least one in-person walkthrough if possible.
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq-4">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                        What if I don't like the initial design concept?
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4" role="region">
+                        Your satisfaction is our priority. Each package includes a defined number of revision rounds
+                        (1 for Essential, 2 for Signature, unlimited for Bespoke). If the initial direction feels off,
+                        just share your feedback and we'll rework the concept until it truly reflects your taste.
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq-5">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                        Does the package price include furniture and materials?
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-5" role="region">
+                        Package fees cover design services only — not the cost of furniture, materials, or
+                        contractor labour. However, we leverage our trade relationships to secure exclusive discounts
+                        of up to 30% on selected brands for all our clients, which can significantly offset costs.
+                    </div>
+                </div>
+
+                <div class="faq-item" id="faq-6">
+                    <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">
+                        Do you offer payment plans?
+                        <i class="fa-solid fa-chevron-down faq-arrow"></i>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-6" role="region">
+                        Yes! We offer flexible payment structures — typically a 50% deposit to begin, with the
+                        remaining balance due upon project completion. For Bespoke projects, milestone-based payment
+                        schedules can be arranged. Contact us to discuss what works best for your situation.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="fade-in-section" id="cta-banner-section">
+        <div class="container">
+            <div class="cta-banner">
+                <div class="badge-pill">
+                    <i class="fa-solid fa-paintbrush"></i> Start Your Project
+                </div>
+                <h2>Ready to transform <span class="gradient-text">your space?</span></h2>
+                <p>Let's create a home that tells your story. Book a free discovery call and take the first step toward your dream interior.</p>
+                <div class="cta-banner-btns">
+                    <a href="mailto:sanskritiscape@gmail.com" class="btn btn-primary" id="cta-banner-primary">Book a Free Call</a>
+                    <a href="#faq-section" class="btn btn-glass" id="cta-banner-secondary">Read FAQs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <i class="fa-solid fa-couch logo-icon"></i>
+                    <span class="logo-text">Sanskritiscape</span>
+                </div>
+                <p class="footer-desc">Crafting interiors that inspire, comfort, and endure — one beautiful space at a time.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/sanskritiscape?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+                        target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Residential Design</a></li>
+                        <li><a href="Cost.html">Packages &amp; Pricing</a></li>
+                        <li><a href="#">Commercial Spaces</a></li>
+                        <li><a href="#">Virtual Consulting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Designers</a></li>
+                        <li><a href="#">Blog &amp; Inspiration</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Explore</h4>
+                    <ul>
+
+                        <li><a href="#">Style Guides</a></li>
+                        <li><a href="#">Client Stories</a></li>
+                        <li><a href="#">Press &amp; Media</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 Sanskritiscape Interiors. All rights reserved.</p>
+            <div class="footer-bottom-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Scroll animations
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.08 });
+            document.querySelectorAll('.fade-in-section').forEach(el => observer.observe(el));
+
+            // Theme toggle
+            const themeBtn = document.getElementById('theme-toggle-btn');
+            const themeIcon = themeBtn?.querySelector('i');
+            if (localStorage.getItem('theme') === 'light') {
+                document.body.classList.add('light-mode');
+                themeIcon?.classList.replace('fa-moon', 'fa-sun');
+            }
+            themeBtn?.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                const isLight = document.body.classList.contains('light-mode');
+                themeIcon?.classList.replace(isLight ? 'fa-moon' : 'fa-sun', isLight ? 'fa-sun' : 'fa-moon');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            });
+
+            // Mobile menu
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const navList = document.querySelector('.nav-list');
+            menuBtn?.addEventListener('click', () => {
+                const open = navList.style.display === 'flex';
+                navList.style.display = open ? 'none' : 'flex';
+                if (!open) {
+                    Object.assign(navList.style, {
+                        flexDirection: 'column', position: 'absolute',
+                        top: '70px', left: '0', width: '100%',
+                        background: 'rgba(5,5,5,0.95)', padding: '20px',
+                        borderBottom: '1px solid rgba(255,255,255,0.1)'
+                    });
+                }
+            });
+
+            // Billing toggle
+            const toggle = document.getElementById('billing-toggle');
+            const monthlyLabel = document.getElementById('monthly-label');
+            const annualLabel = document.getElementById('annual-label');
+
+            const INR_RATE = 83; // 1 USD ≈ ₹83
+
+            const prices = {
+                starter:    { monthly: '999',    annual: '799',    annualNote: 'Full home rate — save $200 per room',     inrMonthly: '83,000',    inrAnnual: '66,300' },
+                pro:        { monthly: '3,499',  annual: '2,799',  annualNote: 'Full home rate — save $700 per project',  inrMonthly: '2,90,400',  inrAnnual: '2,32,300' },
+                enterprise: { monthly: 'Custom', annual: 'Custom', annualNote: '',                                         inrMonthly: null,         inrAnnual: null }
+            };
+
+            function updatePrices(isAnnual) {
+                monthlyLabel.classList.toggle('active-label', !isAnnual);
+                annualLabel.classList.toggle('active-label', isAnnual);
+                ['starter', 'pro', 'enterprise'].forEach(plan => {
+                    const amountEl = document.querySelector(`#card-${plan} .price-amount`);
+                    const noteEl   = document.getElementById(`note-${plan}`);
+                    const inrEl    = document.getElementById(`inr-${plan}`);
+                    if (amountEl) amountEl.textContent = isAnnual ? prices[plan].annual : prices[plan].monthly;
+                    if (noteEl)   noteEl.textContent   = isAnnual ? (prices[plan].annualNote || '\u00a0') : '\u00a0';
+                    if (inrEl) {
+                        const inr = isAnnual ? prices[plan].inrAnnual : prices[plan].inrMonthly;
+                        inrEl.textContent = inr ? `≈ ₹${inr}` : 'Contact for quote';
+                    }
+                });
+            }
+            toggle?.addEventListener('change', () => updatePrices(toggle.checked));
+
+            // FAQ accordion
+            document.querySelectorAll('.faq-question').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item   = btn.closest('.faq-item');
+                    const isOpen = item.classList.contains('open');
+                    document.querySelectorAll('.faq-item').forEach(i => {
+                        i.classList.remove('open');
+                        i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                    });
+                    if (!isOpen) {
+                        item.classList.add('open');
+                        btn.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
